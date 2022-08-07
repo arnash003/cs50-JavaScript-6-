@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Single Page</title>
+        <style>
+            /* Sets all of the Divs to a display of none */
+            div {
+                display: none;
+            }
+        </style>
+        <script>
+            function showPage(page) {
+                document.querySelectorAll('div').forEach(div => {
+                    div.style.display = 'none';
+                })
+                // For each one of the divs we are going to pass it as input to the function. So for each of the divs we are going to modify its style property
+                // setting display equal to none showing only the div that was requested. 
+                document.querySelector(`#${page}`).style.display = "block";
+            }
+
+            // Add event listeners to the buttons
+            // We are saying button.onclick for each of the buttons which means that when this button is clicked, run this function when the button is clicked and we want to show a page.
+            // Which page do we want to show? We want to show "this" button, the button that receives the event, access its data attributes which is its page attribute and go ahead and call the showPage function.
+            // We have the ability to simulate the idea of having multiple pages within a single page.    
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('button').forEach(button => {
+                    button.onclick = function() {
+                        showPage(this.dataset.page);
+                    }
+                })
+            });
+        </script>
+    </head>
+    <body>
+        <button data-page="page1">Page 1</button>
+        <button data-page="page2">Page 2</button>
+        <button data-page="page3">Page 3</button>
+        <div id="page1">
+            <h1>This is page 1</h1>
+        </div>
+        <div id="page2">
+            <h1>This is page 2</h1>
+        </div>
+        <div id="page3">
+            <h2>This is page 3</h2>
+        </div>
+    </body>
+</html>
